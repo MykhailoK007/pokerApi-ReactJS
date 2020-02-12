@@ -8,7 +8,6 @@ import Cards from "./Cards";
 class CardsContainer extends React.Component{
     componentDidMount() {
         if(pokemonAPI) {
-            debugger;
             pokemonAPI.getPokemonsList().then(data => {
                 console.log(data.results);
                 this.props.setPokemonList(data.count);
