@@ -1,30 +1,30 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getPokemonList, setPokemonList} from "../../redux/Card-reducer";
-import {pokemonAPI} from "../../API/api";
+import { getPokemonsThunk, setPokemonList} from "../../redux/Card-reducer";
 import Cards from "./Cards";
 
 
 class CardsContainer extends React.Component{
     componentDidMount() {
-        if(pokemonAPI) {
-            pokemonAPI.getPokemonsList().then(data => {
-                console.log(data.results);
-                this.props.setPokemonList(data.count);
-                this.props.getPokemonList(data.results)
-                console.log(this.props.pokemonList)
-            })
-        }
+             //     pokemonAPI.getPokemonsList().then(data => {
+             //         console.log(data.results);
+             //         this.props.setPokemonList(data.count);
+             //         this.props.getPokemonList(data.results)
+             //         console.log(this.props.pokemonList)
+             //     })
+
+             this.props.getPokemonsThunk()
     }
 
-    render() {
-        return <div>
+    render(){
+        return (
+        <div>
             Total count of Pokemons: {this.props.pokemonAmount}
             {this.props.pokemonList.map(element => {
              return <Cards/>
         })}
 
-        </div>;
+        </div>)
     }
 }
 
@@ -37,6 +37,5 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps,{
-    setPokemonList,
-    getPokemonList
+    getPokemonsThunk
 })(CardsContainer)

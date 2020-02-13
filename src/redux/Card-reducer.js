@@ -1,3 +1,5 @@
+import {pokemonAPI} from "../API/api";
+
 const SET_POKEMON_LIST = 'SET_POKEMON_LIST';
 const GET_POKEMON_BY_NAME = 'GET_POKEMON_BY_NAME';
 const GET_POKEMON_LIST = 'GET_POKEMON_LIST';
@@ -27,7 +29,6 @@ function cardReducer(state = initalState, action){
 
 
 
-
 export const  setPokemonList = (pokemonAmount) => {
         return {
                 type:SET_POKEMON_LIST,
@@ -45,6 +46,18 @@ export const getPokemonByName = (name) => {
         return {
                 type:GET_POKEMON_BY_NAME,
                 name
+        }
+}
+
+export  const getPokemonsThunk = () => {
+        return  (dispatch) =>{
+        pokemonAPI.getPokemonsList()
+            .then(data => {
+                    console.log(data);
+                    dispatch(setPokemonList(data.count))
+                    dispatch(getPokemonList(data.results))
+
+            })
         }
 }
 
