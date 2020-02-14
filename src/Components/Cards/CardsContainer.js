@@ -6,12 +6,6 @@ import Cards from "./Cards";
 
 class CardsContainer extends React.Component{
     componentDidMount() {
-             //     pokemonAPI.getPokemonsList().then(data => {
-             //         console.log(data.results);
-             //         this.props.setPokemonList(data.count);
-             //         this.props.getPokemonList(data.results)
-             //         console.log(this.props.pokemonList)
-             //     })
 
              this.props.getPokemonsThunk()
     }
@@ -21,7 +15,7 @@ class CardsContainer extends React.Component{
         <div>
             Total count of Pokemons: {this.props.pokemonAmount}
             {this.props.pokemonList.map(element => {
-             return <Cards/>
+             return <Cards key={element.name}/>
         })}
 
         </div>)
